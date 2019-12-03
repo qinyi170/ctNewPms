@@ -1,0 +1,23 @@
+<view class="myuser">
+  <image class="imagebcg" src='../images/userbcg.jpg'></image>
+  <view class="userbcg">
+    <view class="luser">
+      <open-data type="userAvatarUrl"></open-data>
+    </view>
+     <open-data class="ruser" type="userNickName" lang="zh_CN"></open-data>
+     <view class="viewphone">{{user_phone}}</view>
+  </view>
+</view>
+<view class="tablist">
+  <view bindtap='getnotice'>
+    <image src='../images/icon1.png'></image>消息通知
+    <text wx:if="{{noticestype==2}}">{{notices}}</text>
+  </view>
+  <view bindtap='phonecallevent'>
+    <image src='../images/icon2.png'></image>联系我们
+  </view>
+  <view class="viewbutton">
+    <button open-type='openSetting'><image src='../images/icon3.png'></image>授权设置</button>
+  </view>
+</view>
+

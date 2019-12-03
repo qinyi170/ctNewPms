@@ -1,0 +1,11 @@
+<scroll-view class="scrollview" scroll-y="true" bindscrolltolower="loadMoreData" style="{{scrollheight}}">
+  <view wx:for="{{allDataList}}" wx:for-item="item" class="viewv">
+    <view>
+      <text class="text1">订单入住通知</text>
+      <text class="text2">{{item.create_time2}}</text>
+    </view>
+    <view>
+      您的<text></text>{{item.net_house_name}}的订单已入住，入住用户的手机号码为{{item.user_phone}}。如有疑问，请及时联系房东
+    </view>
+  </view>
+</scroll-view>

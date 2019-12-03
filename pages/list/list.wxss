@@ -1,0 +1,40 @@
+page{background-color: #f2f2f2}
+.searchbtn{font-size: 30rpx;position: relative;height: 43px;padding: 10px 20rpx 0 20rpx;border-bottom:1px solid #e9ebee;background-color: #fff}
+.searchbtn input{width: 427rpx;border:1rpx solid #0493ff;border-radius: 20px;float: left;padding: 0 65rpx 0 20rpx;height: 70rpx;}
+.searchbtn view{width: 166rpx;border-radius: 4px;background-color: #0493ff;color: #fff;float: right;font-size: 32rpx;padding-top:15rpx;height: 59rpx;text-align: center;}
+.searchbtn text{position: absolute;right: 224rpx; top:32rpx;font-size: 40rpx;color: #fff;background-color: #cecece;width: 50rpx;height: 50rpx;border-radius: 50%;text-align: center;line-height: 50rpx;}
+
+
+.searchlist image.image2{width: 495rpx;height: 543rpx;margin-left: 130rpx;margin-top:200rpx}
+.searchlist view{font-size: 32rpx;}
+.scrollview{border-top:1px solid #e9ebee;}
+.scrollview .listitems{margin-top: 20rpx;padding: 15rpx 20rpx;background-color: #fff}
+.scrollview .listitems:first-of-type{margin-top:0}
+
+view.oview{display: flex;flex-direction: row;flex-wrap:wrap;margin: 20rpx;padding: 10px 0;border-radius: 6px;color: #677587}
+view.oview:first-child{margin-top: 0}
+view.oview>view{width: 100%}
+view.view1{padding: 10rpx 0 2rpx 0;}
+view.view1 image{width: 45rpx;height: 45rpx;margin-right: 10rpx;vertical-align: sub;border-radius: 50%}
+view.view1 .otext1{font-size: 34rpx;color: #364354;vertical-align: top;margin-left: 15rpx;}
+view.view1 .otext2{float: right;color: #fff;font-size: 24rpx;background-color: #fa8c3e;padding: 10rpx 15rpx;border-radius: 30px}
+view.view1 .otext2.otxt1{background-color:#08c0a6}
+view.view2,view.view3{padding-left: 70rpx;font-size: 26rpx;margin-top: 15rpx;}
+view.view3{color: #969390}
+view.view3 text.text1{font-size: 32rpx;margin: 0 5rpx;color: #333333}
+view.view3 text.text2{font-size: 24rpx;background-color: #fdece1;color: #fa8d3e;padding:5rpx 10rpx;border-radius: 10px;margin: 0 10rpx}
+
+.gohome{background: linear-gradient(to right, #fa893e , #fcab40);color: #fff;text-align: center;font-size: 34rpx; border-radius: 40px;width: 400rpx;margin: 0 auto}
+.gohome navigator{font-size: 30rpx;height: 56rpx;padding-top:16rpx;}
+.minibtn{width: 400rpx;}
+.minibtn::after{border:none;}
+
+.checkview{width: 400rpx;margin: 0 auto}
+.checkview button{background: linear-gradient(to right, #fa893e , #fcab40);color: #fff;height:65rpx;text-align: center;font-size: 30rpx;border-radius: 40px;width: 180rpx;display: inline-block;line-height: 65rpx;}
+.checkview button.btncheckclose{float:right}
+
+.checkview .colorfont{font-size: 30rpx;text-align: center;color: 
+#c2c2c2}
+
+
+

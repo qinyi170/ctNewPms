@@ -1,0 +1,10 @@
+.container{padding:100rpx 0}
+.container>view{width: 600rpx;margin-bottom: 50rpx;}
+.container>view:first-of-type{margin-bottom: 30rpx;font-size: 30rpx;}
+.container>view input{font-size: 30rpx;border-bottom: 1px solid #c2c2c2}
+.container>view:last-of-type{margin-top: 50rpx;}
+.imgwidth{width: 100%;display: block}
+.btnwidth{position: fixed;width: 600rpx;left: 50%;bottom:30%; margin-left: -300rpx;background-color: #fa893e;padding:5rpx 0}
+.viewlogo{position: fixed;width: 300rpx;left: 50%;top:20%;margin-left: -150rpx;}
+.viewlogo view{color: #fff;text-align: center;font-size: 34rpx;}
+.viewlogo image{width: 134rpx;height: 134rpx;margin-bottom: 20rpx;}

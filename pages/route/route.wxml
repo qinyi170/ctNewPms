@@ -1,0 +1,13 @@
+<image wx:if="{{phonestate=='1'}}" class="imgwidth" src='../images/welcome.jpg' style="{{scrollheight}}"></image>
+<view wx:if="{{phonestate=='1'}}" class="viewlogo">
+  <view><image src='../images/welcomelogo1.png'></image></view>
+  <view>网约房实名入住</view>
+</view>
+
+<view class="container" wx:if="{{phonestate=='2'}}">
+  <view>请输入与订单预留一致的手机号</view>
+  <view><input type='number' placeholder='输入手机号' bindinput='writephone' value='{{phones}}'></input></view>
+  <view><button class="button2" bindtap='bindphone'>确定</button></view>
+</view>
+
+<button wx:if="{{buttontype==2}}" class="button3 {{currentTopItem==1 ? 'hover1' : 'hover2'}} btnwidth" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信授权登录</button>
