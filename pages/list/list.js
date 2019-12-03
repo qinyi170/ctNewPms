@@ -9,7 +9,7 @@ Page({
     roomstate: "1",//显示订单列表
     appid: "wxabf18d9b8b4e2490",//wxabf18d9b8b4e2490 wx040d0b5da4f5858e
     path: "pages/welcome/welcome",
-    version: "develop",//develop开发版 trial测试版
+    version: "trial",//develop开发版 trial测试版
     datas: "",
     checkState:"",
     textstate:"1",
