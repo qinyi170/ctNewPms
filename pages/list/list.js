@@ -8,7 +8,7 @@ let scanDeviceTimer = null;
 const deviceId = "A4:C1:38:42:B6:7F"
 const serviceId = '0000FFE0-0000-1000-8000-00805F9B34FB';
 const write = '0000FFE1-0000-1000-8000-00805F9B34FB';
-const notify = '0000FFE2-0000-1000-8000-00805F9B34FB';
+const notify = '0000FFE2-0000-1000-8000-00805F9B34FB'; 
 Page({
   data: {
     roomInfo: "",
