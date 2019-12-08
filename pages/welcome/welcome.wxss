@@ -1,0 +1,6 @@
+.imgwidth{width: 100%;display: block}
+.btnwidth{position: fixed;width: 600rpx;left: 50%;bottom:30%; margin-left: -300rpx;background-color: #fa893e;padding:5rpx 0}
+.viewlogo{position: fixed;width: 300rpx;left: 50%;top:20%;margin-left: -150rpx;}
+.viewlogo view{color: #fff;text-align: center;font-size: 34rpx;}
+.viewlogo image{width: 134rpx;height: 134rpx;margin-bottom: 20rpx;}
+

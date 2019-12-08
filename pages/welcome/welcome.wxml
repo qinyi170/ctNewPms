@@ -1,0 +1,7 @@
+<image class="imgwidth" src='../images/welcome.jpg' style="{{scrollheight}}"></image>
+<button wx:if="{{buttontype==2}}" class="button3 {{currentTopItem==1 ? 'hover1' : 'hover2'}} btnwidth" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信授权登录</button>
+<button wx:if="{{buttontype==1}}" class="button3 btnwidth" bindtap='getrefech'>登录</button>
+<view class="viewlogo">
+  <view><image src='../images/welcomelogo1.png'></image></view>
+  <view>网约房实名入住</view>
+</view>

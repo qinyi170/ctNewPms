@@ -1,0 +1,14 @@
+.myuser{height: 250rpx;position: relative}
+.imagebcg{width: 750rpx;height: 240rpx;position: absolute;top: 0;z-index: 100}
+.userbcg{width: 640rpx;margin: 0 auto;height: 160rpx;position: relative;z-index: 101;border-radius: 6px;box-shadow:1px 1px 3px #D1CDCD;margin-top: 40rpx;padding-top:40rpx;padding-left: 20rpx;background-color: #fff}
+.luser{float:left;width: 122rpx;height: 122rpx;border-radius: 50%;margin-right: 40rpx;}
+.ruser{font-size: 34rpx;}
+.tablist{width: 640rpx;margin: 0 auto;}
+.tablist view{font-size: 32rpx;border-top: 1rpx solid #e1e1e1;padding: 40rpx 0}
+.tablist view:first-child{border-top:none}
+.tablist view image{width: 35rpx;height: 38rpx;vertical-align: sub;margin-right: 15rpx;}
+.tablist view text{color: #fff;background-color: #f6534e;font-size: 30rpx;height: 40rpx;width: 40rpx;text-align: center;line-height: 40rpx;border-radius: 40rpx;float:right}
+.tablist view.viewbutton{padding: 0;}
+.tablist view.viewbutton button{background-color: #fff;line-height: 0;font-size: 32rpx;text-align: left;padding: 40rpx 0;}
+.tablist view.viewbutton button::after{border:none}
+.viewphone{margin-top:20rpx;font-size: 28rpx;}

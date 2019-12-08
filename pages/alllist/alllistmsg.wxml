@@ -1,0 +1,45 @@
+<view class="viewcon">
+  <view class="viewbcg"></view>
+  <view class="viewmsg">
+    <view class="view1">
+      <text wx:if="{{roomInfo.check_state=='wait'}}">待入住</text>
+      <text wx:if="{{roomInfo.check_state=='check'}}">已入住</text>
+      <text wx:if="{{roomInfo.check_state=='retreat'}}">已退房</text>
+      <text wx:if="{{roomInfo.check_state=='cancel'}}">已取消</text>
+    </view>
+    <view class="view2">
+      <view class="view2_1">
+        <view>{{reside_date}}</view>
+        <view>最早入住时间{{reside_date_time}}</view>
+      </view>
+      <view class="view2_2">{{roomInfo.total}}</view>
+      <view class="view2_1">
+        <view>{{reside_retreat_date}}</view>
+        <view>最晚离开时间{{reside_retreat_date_time}}</view>
+      </view>
+    </view>
+    <view class='view3'>
+      <view>
+        <text>房源</text>
+        <text>{{roomInfo.net_house_name}}</text>
+      </view>
+      <view>
+        <text>房源地址</text>
+        <text wx:if="{{roomInfo.net_house_addr==null}}">-</text>
+        <text wx:if="{{roomInfo.net_house_addr!=null}}">{{roomInfo.net_house_addr}}</text>
+      </view>
+      <view wx:if="{{roomInfo.check_state=='check' && roomInfo.lock_type=='0200' && roomInfo.order_house_password!=''}}">
+        <text>门锁密码</text>
+        <text>{{roomInfo.order_house_password}}</text>
+      </view>
+      <!-- <view>
+        <text>入住时间</text>
+        <text wx:if="{{roomInfo.check_state=='check' || roomInfo.check_state=='retreat'}}">{{roomInfo.reside_date}}</text>
+      </view> -->
+    </view>
+    <view class='view4'>
+      <view>预入住人信息</view>
+      <view>{{roomInfo.reside_name}}  {{roomInfo.reside_phone}}</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,54 @@
+{
+  "plugins": {
+    "myPlugin": {
+      "version": "1.1.3",
+      "provider": "wx3107f0a218053d99"
+    }
+  },
+  "pages": [
+    "pages/welcome/welcome",
+    "pages/list/list",
+    "pages/alllist/alllist",
+    "pages/alllist/alllistmsg",
+    "pages/user/user",
+    "pages/user/roomnotice",
+    "pages/route/route",
+    "pages/test/test"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wxabf18d9b8b4e2490",
+    "wx040d0b5da4f5858e"
+  ],
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#ff7a17",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/list/list",
+        "text": "入住",
+        "iconPath": "pages/images/home.png",
+        "selectedIconPath": "pages/images/homehover.png"
+      },
+      {
+        "pagePath": "pages/alllist/alllist",
+        "text": "订单",
+        "iconPath": "pages/images/order.png",
+        "selectedIconPath": "pages/images/orderhover.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "pages/images/user.png",
+        "selectedIconPath": "pages/images/userhover.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

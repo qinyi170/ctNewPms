@@ -1,0 +1,24 @@
+view{background-color: #fff}
+page{background-color: #eef0f2}
+.tablist{display: flex;align-items: center;justify-content: space-between;
+box-sizing: border-box;padding: 3px 0 10px 0;border-bottom: 1px solid #d5d7d9;}
+.tablist view{width: 156rpx;text-align: center;font-size: 30rpx;margin: 0 20rpx;border-bottom: 1rpx solid #ffffff;height: 29px;}
+.tablist view:first-of-type{width: 126rpx;}
+.tablist view.hovers{color: #fd8238;border-bottom: 1rpx solid #fd8238}
+
+.scrollview{position: relative;z-index: 999;padding-top: 20rpx;}
+.scrollview view.oview{display: flex;flex-direction: row;flex-wrap:wrap;margin: 20rpx;padding: 10px 0;border-radius: 6px;color: #677587}
+.scrollview view.oview:first-child{margin-top: 0}
+.scrollview view.oview>view{width: 100%}
+view.view1{padding: 10rpx 40rpx 2rpx 20rpx;}
+view.view1 image{width: 45rpx;height: 45rpx;margin-right: 10rpx;vertical-align: sub;border-radius: 50%}
+view.view1 .otext1{font-size: 34rpx;color: #364354}
+view.view1 .otext2{float: right;color: #fd8238;font-size: 30rpx}
+view.view2{padding-left: 70rpx;font-size: 28rpx;margin-top: 15rpx;}
+view.viewbtn{border-top:1px solid #ededed;margin-top:20rpx;padding:30rpx 20rpx 10rpx 0}
+view.viewbtn text{display: block;padding: 5rpx 35rpx 9rpx 35rpx;background-color: #f2f2f2;color: #404040;font-size: 28rpx;margin-right: 20rpx;float:right;border-radius: 20px;}
+view.viewbtn text:hover{background-color: #d5d7d9;color: #fff}
+
+.medaltitle{margin-top:20rpx;}
+.colorfont{font-size: 30rpx;text-align: center;color: 
+#c2c2c2}

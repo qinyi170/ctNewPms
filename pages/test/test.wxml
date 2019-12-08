@@ -1,0 +1,3 @@
+<navigator target="miniProgram" open-type="navigate" app-id="{{appid}}" path="{{path}}" extra-data="{{item.data}}" version="{{version}}" bindsuccess="gobindsuccess" data-oauthcode="{{item.roomInfo.oauth_code}}">跳转</navigator>
+
+<navigator target="miniProgram" open-type="navigate" app-id="{{appid}}" path="" extra-data="" version="release">打开绑定的小程序</navigator>
