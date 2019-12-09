@@ -11,6 +11,7 @@
   2.4、监听蓝牙报文返回后作处理（蓝牙返回的是二进制，将二进制转成16进制字符串）
   2.5、发送报文发送下发到蓝牙设备（蓝牙设备只接收二进制）
 */
+var utils = require("./util.js");
 function openBluetoothAdapter(fun = () => { }, call) {
   closeBluetoothAdapter({
     complete: () => {
@@ -20,11 +21,9 @@ function openBluetoothAdapter(fun = () => { }, call) {
           fun(call);
         },
         fail: err => {
-          if (err.errCode === 10001) {
-            wx.onBluetoothAdapterStateChange(res => { // 监听蓝牙适配器状态变化事件
-              console.log("蓝牙适配器状态变化");
-              res.available && fun();
-            })
+          if (err.errCode == "10001" || err.errMsg == "openBluetoothAdapter:fail:ble not available" || err.errMsg == "openBluetoothAdapter:fail:not available") {
+            utils.alertViewNosucces("提示", "您还没有开启蓝牙，请开启", false);
+            return;
           }
         }
       })
@@ -120,7 +119,7 @@ function connection({
       });
     },
     fail() {
-      console.log("连接蓝牙失败: {name: " + name + ", deviceId: " + deviceId + "}");
+      console.log("连接蓝牙失败: {lockname: " + lockname + ", deviceId: " + deviceId + "}");
       wx.hideLoading();
     }
   })

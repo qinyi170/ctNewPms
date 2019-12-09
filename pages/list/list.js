@@ -8,7 +8,7 @@ let scanDeviceTimer = null;
 const deviceId = "A4:C1:38:42:B6:7F"
 const serviceId = '0000FFE0-0000-1000-8000-00805F9B34FB';
 const write = '0000FFE1-0000-1000-8000-00805F9B34FB';
-const notify = '0000FFE2-0000-1000-8000-00805F9B34FB'; 
+const notify = '0000FFE2-0000-1000-8000-00805F9B34FB';
 Page({
   data: {
     roomInfo: "",
@@ -143,7 +143,9 @@ Page({
         if (res1.data.errorCode == "0100") {
           athis.setData({
             medalmsg: "2"
-          })
+          });
+          athis.showUserOrder(res1.data.errorCode);
+          return;
         }
         if (res1.data.errorCode == "0000") {
           var s = res1.data.dataObject
@@ -224,12 +226,12 @@ Page({
   openLockSitong() {
     let { lockid, lockname, locktype, nethouseid, oauthcode } = sitong;
     let that = this;
-    that.setData({
-      enablestate: "立即开启",
-      enable: false,
-      state: '正在开启蓝牙设备'
-    });
     bluetooth.openBluetoothAdapter(bluetooth.startBluetoothDevicesDiscovery, ({ devices }) => {
+      that.setData({
+        enablestate: "立即开启",
+        enable: false,
+        state: '正在开启蓝牙设备'
+      });
       let device
       for (let i = 0, len = devices.length; i < len; i++) {
         device = devices[i];
@@ -290,7 +292,9 @@ Page({
                   }, ({ data: { result, errorCode, message, dataObject: hexStr } }) => {
                     if (result == "0") {
                       if (errorCode == "0000000") {
-                        that.writeBLECharacteristicValue(bluetooth.hexStr2byte(hexStr), () => console.log("输出删除所有密码命令成功"));
+                        setTimeout(() => { // 等待关锁
+                          that.writeBLECharacteristicValue(bluetooth.hexStr2byte(hexStr), () => console.log("输出删除所有密码命令成功"));
+                        }, 8000);
                       }
                     } else if (result == "2") {
                       utils.alertView("提示", "你已退出，请点击“确认”重新登录", () => app.getLogin());
@@ -335,6 +339,9 @@ Page({
                     }
                   });
                 } else {
+                  wx.closeBLEConnection({ // 断开蓝牙连接
+                    deviceId: deviceId
+                  });
                   that.setData({
                     enablestate: "立即开启",
                     enable: true,
