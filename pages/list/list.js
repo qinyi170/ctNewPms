@@ -230,8 +230,9 @@ Page({
       that.setData({
         enablestate: "立即开启",
         enable: false,
-        state: '正在开启蓝牙设备'
+        state: '请摸亮锁,并启动蓝牙'
       });
+
       let device
       for (let i = 0, len = devices.length; i < len; i++) {
         device = devices[i];
@@ -362,10 +363,10 @@ Page({
             "lock_id": lockid,
             "lock_name": lockname,
             "oauth_code": oauthcode
-          }, ({ data: { result, errorCode, message, dataObject: { adminPwd } } }) => {
+          }, ({ data: { result, errorCode, message, dataObject } }) => {
             if (result == "0") {
               // 将二进制报文发送到蓝牙设备
-              that.writeBLECharacteristicValue(bluetooth.hexStr2byte(adminPwd), () => console.log("输出管理员命令成功"));
+              that.writeBLECharacteristicValue(bluetooth.hexStr2byte(dataObject.adminPwd), () => console.log("输出管理员命令成功"));
             } else if (result == "2") {
               utils.alertView("提示", "你已退出，请点击“确认”重新登录", () => app.getLogin());
             } else {
@@ -536,12 +537,18 @@ Page({
       }
     })
   },
-  gobindsuccess: function (e) {
+  gobindsuccess (e) {
+    let { lockid, lockname, locktype, nethouseid, oauthcode} = e.currentTarget.dataset
     app.globalData.openstate = "1"
     this.setData({
       openshowuserorder: "2",
-      oauthcode: e.currentTarget.dataset.oauthcode
-    })
+      oauthcode
+    });
+    sitong.lockid = lockid;
+    sitong.lockname = lockname;
+    sitong.locktype = locktype;
+    sitong.nethouseid = nethouseid;
+    sitong.oauthcode = oauthcode;
   },
 
 

@@ -32,7 +32,13 @@
               extra-data="{{item.data}}" 
               version="{{version}}"
               bindsuccess="gobindsuccess" 
-              data-oauthcode="{{item.roomInfo.oauth_code}}">
+              
+              data-oauthcode="{{item.roomInfo.oauth_code}}"
+              data-lockid="{{item.roomInfo.lock_id}}"
+              data-locktype="{{item.roomInfo.lock_type}}" 
+              data-lockname="{{item.roomInfo.lock_name}}"
+              data-nethouseid="{{item.roomInfo.net_house_id}}"
+              >
               立即入住
             </navigator>
           </view>

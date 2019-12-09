@@ -51,7 +51,7 @@ function startBluetoothDevicesDiscovery(call) {
       },
       fail: () => console.log("搜寻附近的蓝牙外围设备失败")
     });
-    setTimeout(stopBluetoothDevicesDiscovery, 10000); // 10 秒后停止搜索蓝牙设备
+    setTimeout(stopBluetoothDevicesDiscovery, 30000); // 30 秒后停止搜索蓝牙设备
   });
 }
 
