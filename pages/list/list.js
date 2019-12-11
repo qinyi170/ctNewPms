@@ -5,7 +5,6 @@ const dev = {}, sitong = {};
 var plugin = requirePlugin("myPlugin");
 let platform = '';
 let scanDeviceTimer = null;
-const deviceId = "A4:C1:38:42:B6:7F"
 const serviceId = '0000FFE0-0000-1000-8000-00805F9B34FB';
 const write = '0000FFE1-0000-1000-8000-00805F9B34FB';
 const notify = '0000FFE2-0000-1000-8000-00805F9B34FB';
@@ -15,7 +14,7 @@ Page({
     roomstate: "1",//显示订单列表
     appid: "wxabf18d9b8b4e2490",//wxabf18d9b8b4e2490 wx040d0b5da4f5858e
     path: "pages/welcome/welcome",
-    version: "trial",//develop开发版 trial ceshi版
+    version: "develop",//develop开发版 trial ceshi版
     datas: "",
     checkState: "",
     textstate: "1",
@@ -361,21 +360,23 @@ Page({
           });
         },
         success: () => {
-          utils.request("/order/getAdminPwd", {
-            "skey": app.globalData.skey,
-            "lock_id": lockid,
-            "lock_name": lockname,
-            "oauth_code": oauthcode
-          }, ({ data: { result, errorCode, message, dataObject } }) => {
-            if (result == "0") {
-              // 将二进制报文发送到蓝牙设备
-              that.writeBLECharacteristicValue(bluetooth.hexStr2byte(dataObject.adminPwd), () => console.log("输出管理员命令成功"));
-            } else if (result == "2") {
-              utils.alertView("提示", "你已退出，请点击“确认”重新登录", () => app.getLogin());
-            } else {
-              utils.alertViewNosucces("提示", message, false);
-            }
-          });
+          setTimeout(() => {
+            utils.request("/order/getAdminPwd", {
+              "skey": app.globalData.skey,
+              "lock_id": lockid,
+              "lock_name": lockname,
+              "oauth_code": oauthcode
+            }, ({ data: { result, errorCode, message, dataObject } }) => {
+              if (result == "0") {
+                // 将二进制报文发送到蓝牙设备
+                that.writeBLECharacteristicValue(bluetooth.hexStr2byte(dataObject.adminPwd), () => console.log("输出管理员命令成功"));
+              } else if (result == "2") {
+                utils.alertView("提示", "你已退出，请点击“确认”重新登录", () => app.getLogin());
+              } else {
+                utils.alertViewNosucces("提示", message, false);
+              }
+            });
+          }, 500);
         }
       });
     });

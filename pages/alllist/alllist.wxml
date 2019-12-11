@@ -25,7 +25,16 @@
             </block>
             <block wx:if="{{item.is_gray=='false'}}">
               <text bindtap='exitroom' data-roomcode="{{item.order_id}}">退房</text>
-              <text bindtap='openroom' data-roomcode="{{item.oauth_code}}" data-locktype="{{item.lock_type}}" data-nethouseid="{{item.net_house_id}}">一键开门</text>
+              <text
+                bindtap='openroom'
+                data-roomcode="{{item.oauth_code}}"
+                data-locktype="{{item.lock_type}}"
+                data-nethouseid="{{item.net_house_id}}"
+
+                data-oauthcode="{{item.oauth_code}}" 
+                data-lockid="{{item.lock_id}}"
+                data-lockname="{{item.lock_name}}"
+              >一键开门</text>
             </block>
           </view>
         </view>
