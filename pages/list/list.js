@@ -218,6 +218,9 @@ Page({
     }
   },
   closemedal: function () {
+    dev.deviceId && wx.closeBLEConnection({
+      deviceId: dev.deviceId
+    })
     this.setData({
       medalstate: "1",
       enable: true
@@ -244,7 +247,7 @@ Page({
       bluetooth.stopBluetoothDevicesDiscovery();
 
       let deviceId = device.deviceId;
-      bluetooth.createBLEConnection({
+      deviceId && bluetooth.createBLEConnection({
         oldDeviceId: dev.deviceId,
         lockname,
         deviceId,

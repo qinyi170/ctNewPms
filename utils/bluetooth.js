@@ -62,23 +62,7 @@ function stopBluetoothDevicesDiscovery(complete = () => console.log("停止搜�
 }
 
 function createBLEConnection(p) {
-  if (p.oldDeviceId) {
-    closeBLEConnection(p, connection);
-  } else {
-    connection(p);
-  }
-}
-
-function closeBLEConnection(p, complete = () => { }) {
-  wx.closeBLEConnection({
-    deviceId: p.oldDeviceId,
-    complete() {
-      complete(p);
-    },
-  })
-  wx.closeBLEConnection({
-    complete: complete
-  })
+  connection(p);
 }
 
 function connection({
@@ -119,6 +103,11 @@ function connection({
       });
     },
     fail() {
+      wx.showModal({
+        title: '提示',
+        content: '连接蓝牙失败，请重新操作',
+        showCancel: false
+      });
       console.log("连接蓝牙失败: {lockname: " + lockname + ", deviceId: " + deviceId + "}");
       wx.hideLoading();
     }
@@ -126,7 +115,7 @@ function connection({
 }
 
 function hexStr2byte(hexStr) {
-  return new Int8Array(hexStr.match(/[\da-f]{2}/gi).map(hexStr => parseInt(hexStr, 16))).buffer
+  return new Uint8Array(hexStr.match(/[\da-f]{2}/gi).map(hexStr => parseInt(hexStr, 16))).buffer
 }
 
 function byte2hexStr(bytes) {
@@ -141,7 +130,6 @@ module.exports = {
   startBluetoothDevicesDiscovery,
   stopBluetoothDevicesDiscovery,
   createBLEConnection,
-  closeBLEConnection,
   hexStr2byte,
   byte2hexStr
 }
