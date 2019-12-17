@@ -64,7 +64,7 @@ Page({
     if (e.currentTarget.dataset.ischeckin == "5") {
       utils.alertViewNosucces("提示", "不带门铃身份证未到入住时间，发送通知给房发通知，等待房东确认，拨打房东电话15901235813", false);
     }
-    if (e.currentTarget.dataset.ischeckin == "6") {
+    if (e.currentTarget.dataset.ischeckin ==  "6") {
       utils.alertViewNosucces("提示", "不带门铃fei身份证请点击发送通知给房东，等待房东确认，如可直接拨打房东电话15901235813", false);
     }
     if (e.currentTarget.dataset.ischeckin == "7") {
