@@ -1,0 +1,17 @@
+page{background-color: #f2f2f2}
+.viewcon{position: relative;z-index: 1000}
+.viewbcg{position: absolute;width: 100%; height: 218rpx;background: linear-gradient(to right, #fe5504 , #fe8a03);z-index: 1001}
+.viewmsg{position: relative;z-index: 1002;}
+.viewmsg>view{margin: 0 auto;overflow: hidden}
+.viewmsg>view.view1{width: 645rpx;color: #fff;font-size: 36rpx;padding-top: 50rpx;margin-bottom: 30rpx}
+.viewmsg>view.view2{width: 680rpx;display: flex;flex-direction: row;flex-wrap:wrap;background-color: #fff;border-radius: 8px;padding: 45rpx 0;margin-bottom: 15rpx}
+.viewmsg>view.view2 .view2_1{width: 290rpx;text-align: center}
+.viewmsg>view.view2 .view2_1 view:first-of-type{font-size: 34rpx;color: #333333;margin-bottom: 15rpx}
+.viewmsg>view.view2 .view2_1 view:last-of-type{font-size: 26rpx;color: #999999}
+.viewmsg>view.view2 .view2_2{width: 100rpx;font-size: 30rpx;color: #333333;padding-top: 25rpx;text-align: center}
+.viewmsg>view.view3,.viewmsg>view.view4{width: 630rpx;background-color: #fff;border-radius: 8px;padding: 0 40rpx;font-size: 30rpx;margin-bottom: 15rpx}
+.viewmsg>view.view3>view{border-bottom: 1px solid #f2f2ec;padding: 30rpx 0}
+.viewmsg>view.view3>view:last-of-type{border-bottom: none}
+.viewmsg>view.view3>view text:last-of-type{float: right;color: #555555}
+.viewmsg>view.view4{padding: 10rpx 40rpx;}
+.viewmsg>view.view4>view{padding: 10rpx 0;}

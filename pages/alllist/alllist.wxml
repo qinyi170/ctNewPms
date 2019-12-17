@@ -1,0 +1,53 @@
+<view class="tablist">
+  <view class="{{currentTopItem==idx ? 'hovers' : ''}}" wx:for="{{tabitems}}" wx:for-index="idx" data-idx="{{idx}}" bindtap='switchTab' wx:key="id1">{{item}}</view>
+</view>
+<swiper current="{{currentTopItem}}" duration="300" bindchange="swiperTab" style="{{scrollheight}}">
+  <block wx:for="{{currentTopItems}}" wx:key="id2">
+    <swiper-item>
+      <scroll-view class="scrollview" scroll-y="true" bindscrolltolower="loadMoreData" style="{{scrollheight}}">
+        <view class="oview" wx:for="{{allDataList}}" wx:for-item="item" wx:key="id3">
+          <view bindtap="ordermsg" data-oauthcode="{{item.oauth_code}}">
+            <view class="view1">
+              <image src='data:image/png;base64,{{item.head_pic}}'></image>
+              <text class="otext1">{{item.net_house_name}}</text>
+              <text class="otext2" wx:if="{{item.check_state=='wait'}}">待入住</text>
+              <text class="otext2" wx:if="{{item.check_state=='check'}}">已入住</text>
+              <text class="otext2" wx:if="{{item.check_state=='retreat'}}">已退房</text>
+              <text class="otext2" wx:if="{{item.check_state=='cancel'}}">已取消</text>
+            </view>
+            <view class="view2">{{item.net_house_addr}}</view>
+            <view class="view2">{{item.reside_date}}至{{item.reside_retreat_date}} {{item.total}}</view>
+            <view class="view2">更新时间：{{item.update_date}}</view>
+          </view>
+          <view class="viewbtn" wx:if="{{item.check_state=='check'}}">
+            <block wx:if="{{item.is_gray=='true'}}">
+              <view class="colorfont">该订单已被其他人入住</view>
+            </block>
+            <block wx:if="{{item.is_gray=='false'}}">
+              <text bindtap='exitroom' data-roomcode="{{item.order_id}}">退房</text>
+              <text bindtap='openroom' data-roomcode="{{item.oauth_code}}" data-locktype="{{item.lock_type}}" data-nethouseid="{{item.net_house_id}}">一键开门</text>
+            </block>
+          </view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+  </block>
+</swiper>
+<view class="medalbcg" wx:if="{{medalstate==2}}"></view>
+<view class="medalcon mcon1" wx:if="{{medalstate==2}}">
+  <text class="medalclose" bindtap='closemedal'>×</text>
+  <view class="medaltitle" style='color:#fff'>认证成功</view>
+  <block wx:if="{{medalmsg=='1'}}">
+    <view class="medalimage"><image src='../images/medal1.jpg'></image></view>
+    <view class="medalbtn"><button class="button1" bindtap='lanyaopen' disabled='{{!enable}}'>{{enablestate}}</button></view>
+    <view class="medaltext">请点击立即开门，开门入住</view>
+  </block>
+  <block wx:if="{{medalmsg=='2'}}">
+    <view class="medalimage"><image src='../images/medal2.jpg'></image></view>
+    <view class="medaltext1">请把身份证放在门锁读卡区</view>
+  </block>
+  <block wx:if="{{medalmsg=='3'}}">
+    <view class="medalimage1">{{mima}}</view>
+    <view class="medaltext1">请在门锁密码区输入密码</view>
+  </block>
+</view>
