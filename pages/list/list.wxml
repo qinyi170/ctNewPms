@@ -23,43 +23,16 @@
         </view>
         <block wx:if="{{item.roomInfo.check_state=='wait'}}">
           <view class="gohome" wx:if="{{item.roomInfo.isCheckIn=='0'}}">
-            <navigator 
-              class="miniPrograms" 
-              target="miniProgram" 
-              open-type="navigate" 
-              app-id="{{appid}}"
-              path="{{path}}"
-              extra-data="{{item.data}}" 
-              version="{{version}}"
-              bindsuccess="gobindsuccess" 
-              
-              data-oauthcode="{{item.roomInfo.oauth_code}}"
-              >
-              立即入住
-            </navigator>
+            <navigator class="miniPrograms" target="miniProgram" open-type="navigate" app-id="{{appid}}" path="{{path}}" extra-data="{{item.data}}" version="{{version}}" bindsuccess="gobindsuccess" data-oauthcode="{{item.roomInfo.oauth_code}}">立即入住</navigator>
           </view>
-          <button
-            class="button3 minibtn"
-            bindtap='minibtn'
-            data-ischeckin="{{item.roomInfo.isCheckIn}}"
-            wx:if="{{item.roomInfo.isCheckIn !='0'}}">
-            立即入住
-          </button>
+          <button class="button3 minibtn" bindtap='minibtn' data-ischeckin="{{item.roomInfo.isCheckIn}}" wx:if="{{item.roomInfo.isCheckIn !='0'}}">立即入住</button>
         </block>   
         <view wx:if="{{item.roomInfo.check_state=='check'}}" class="checkview">
           <block wx:if="{{item.roomInfo.is_gray=='true'}}">
             <view class="colorfont">该订单已被其他人入住</view>
           </block>
           <block wx:if="{{item.roomInfo.is_gray=='false'}}">
-            <button bindtap='openroom' 
-              data-oauthcode="{{item.roomInfo.oauth_code}}" 
-              data-lockid="{{item.roomInfo.lock_id}}"
-              data-locktype="{{item.roomInfo.lock_type}}" 
-              data-lockname="{{item.roomInfo.lock_name}}"
-              data-nethouseid="{{item.roomInfo.net_house_id}}"
-            >
-              开门
-            </button>
+            <button bindtap='openroom' data-oauthcode="{{item.roomInfo.oauth_code}}" data-lockid="{{item.roomInfo.lock_id}}" data-locktype="{{item.roomInfo.lock_type}}" data-lockname="{{item.roomInfo.lock_name}}"data-nethouseid="{{item.roomInfo.net_house_id}}">开门</button>
             <button class="btncheckclose" bindtap='exitroom' data-orderid="{{item.roomInfo.order_id}}">退房</button>
           </block>
         </view>
