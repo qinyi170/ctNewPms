@@ -1,8 +1,14 @@
 const app = getApp();
+const bluetooth = require("../../utils/bluetooth.js");
 var utils = require("../../utils/util.js");
 var plugin = requirePlugin("myPlugin");
 let platform = '';
 let scanDeviceTimer = null;
+
+const serviceId = '0000FFE0-0000-1000-8000-00805F9B34FB';
+const write = '0000FFE1-0000-1000-8000-00805F9B34FB';
+const notify = '0000FFE2-0000-1000-8000-00805F9B34FB';
+const dev = {}, sitong = {};
 Page({
   data: {
     allDataList: [],
@@ -154,12 +160,198 @@ Page({
       }
     })
   },
+
+  openLockSitong() {
+    let { lockid, lockname, locktype, nethouseid, oauthcode } = sitong;
+    let that = this;
+    bluetooth.openBluetoothAdapter(bluetooth.startBluetoothDevicesDiscovery, ({ devices }) => {
+      that.setData({
+        enablestate: "立即开启",
+        enable: false,
+        state: '请摸亮锁,并启动蓝牙'
+      });
+
+      let device
+      for (let i = 0, len = devices.length; i < len; i++) {
+        device = devices[i];
+        if (device.name.trim() == lockname) {
+          break;
+        }
+      }
+      if (device.name.trim() != lockname) return;
+      bluetooth.stopBluetoothDevicesDiscovery();
+
+      let deviceId = device.deviceId;
+      deviceId && bluetooth.createBLEConnection({
+        oldDeviceId: dev.deviceId,
+        lockname,
+        deviceId,
+        serviceId,
+        notifyCharacteristicId: notify,
+        createBLEConnectionSuccess: () => {
+          dev.deviceId = deviceId;
+        },
+        onBLECharacteristicValueChange: hex => {
+          //   将16进制字符串发送到服务器
+          utils.request("/order/openLockCallback", {
+            "skey": app.globalData.skey,
+            "lock_id": lockid,
+            "hexStr": hex,
+            "net_house_id": nethouseid,
+            "lock_name": lockname,
+            "oauth_code": oauthcode
+          }, ({ data: { result, errorCode, message, dataObject: hexStr } }) => {
+            if (result == "0") {
+              if (errorCode == "0000000") {
+                if (hexStr == 24) { // 获取令牌成功，调用开锁接口
+                  utils.request("/order/openLockByBluetooth", {
+                    "skey": app.globalData.skey,
+                    "lock_id": lockid,
+                    "net_house_id": nethouseid,
+                    "lock_name": lockname,
+                    "oauth_code": oauthcode
+                  }, ({ data: { result, errorCode, message, dataObject: hexStr } }) => {
+                    if (result == "0") {
+                      if (errorCode == "0000000") {
+                        that.writeBLECharacteristicValue(bluetooth.hexStr2byte(hexStr), () => console.log("输出开锁命令成功"));
+                      }
+                    } else if (result == "2") {
+                      utils.alertView("提示", "你已退出，请点击“确认”重新登录", () => app.getLogin());
+                    } else {
+                      utils.alertViewNosucces("提示", message, false);
+                    }
+                  });
+                } else if (hexStr == 31) { // 开锁成功，删除所有开锁密码
+                  utils.request("/order/deleteAllPwd", {
+                    "skey": app.globalData.skey,
+                    "lock_id": lockid,
+                    "net_house_id": nethouseid,
+                    "lock_name": lockname,
+                    "oauth_code": oauthcode
+                  }, ({ data: { result, errorCode, message, dataObject: hexStr } }) => {
+                    if (result == "0") {
+                      if (errorCode == "0000000") {
+                        setTimeout(() => { // 等待关锁
+                          that.writeBLECharacteristicValue(bluetooth.hexStr2byte(hexStr), () => console.log("输出删除所有密码命令成功"));
+                        }, 8000);
+                      }
+                    } else if (result == "2") {
+                      utils.alertView("提示", "你已退出，请点击“确认”重新登录", () => app.getLogin());
+                    } else {
+                      utils.alertViewNosucces("提示", message, false);
+                    }
+                  });
+                } else if (hexStr == 116) { // 设置新的开锁密码
+                  utils.request("/order/addPwdId", {
+                    "skey": app.globalData.skey,
+                    "lock_id": lockid,
+                    "net_house_id": nethouseid,
+                    "lock_name": lockname,
+                    "oauth_code": oauthcode
+                  }, ({ data: { result, errorCode, message, dataObject: hexStr } }) => {
+                    if (result == "0") {
+                      if (errorCode == "0000000") {
+                        that.writeBLECharacteristicValue(bluetooth.hexStr2byte(hexStr), () => console.log("输出密码ID成功"));
+                      }
+                    } else if (result == "2") {
+                      utils.alertView("提示", "你已退出，请点击“确认”重新登录", () => app.getLogin());
+                    } else {
+                      utils.alertViewNosucces("提示", message, false);
+                    }
+                  });
+                } else if (hexStr == 113) {// 添加用户成功，添加密码
+                  utils.request("/order/addPwd", {
+                    "skey": app.globalData.skey,
+                    "lock_id": lockid,
+                    "net_house_id": nethouseid,
+                    "lock_name": lockname,
+                    "oauth_code": oauthcode
+                  }, ({ data: { result, errorCode, message, dataObject: hexStr } }) => {
+                    if (result == "0") {
+                      if (errorCode == "0000000") {
+                        that.writeBLECharacteristicValue(bluetooth.hexStr2byte(hexStr), () => console.log("输出密码成功"));
+                      }
+                    } else if (result == "2") {
+                      utils.alertView("提示", "你已退出，请点击“确认”重新登录", () => app.getLogin());
+                    } else {
+                      utils.alertViewNosucces("提示", message, false);
+                    }
+                  });
+                } else {
+                  wx.closeBLEConnection({ // 断开蓝牙连接
+                    deviceId: deviceId
+                  });
+                  that.setData({
+                    enablestate: "立即开启",
+                    enable: true,
+                    state: '开启蓝牙设备失败'
+                  });
+                }
+              }
+            } else if (result == "2") {
+              utils.alertView("提示", "你已退出，请点击“确认”重新登录", () => app.getLogin());
+            } else {
+              utils.alertViewNosucces("提示", message, false);
+            }
+          });
+        },
+        success: () => {
+          utils.request("/order/getAdminPwd", {
+            "skey": app.globalData.skey,
+            "lock_id": lockid,
+            "lock_name": lockname,
+            "oauth_code": oauthcode
+          }, ({ data: { result, errorCode, message, dataObject } }) => {
+            if (result == "0") {
+              // 将二进制报文发送到蓝牙设备
+              that.writeBLECharacteristicValue(bluetooth.hexStr2byte(dataObject.adminPwd), () => console.log("输出管理员命令成功"));
+            } else if (result == "2") {
+              utils.alertView("提示", "你已退出，请点击“确认”重新登录", () => app.getLogin());
+            } else {
+              utils.alertViewNosucces("提示", message, false);
+            }
+          });
+        }
+      });
+    });
+  },
+
+  writeBLECharacteristicValue(value, success) {
+    wx.writeBLECharacteristicValue({
+      deviceId: dev.deviceId,
+      serviceId: serviceId,
+      characteristicId: write,
+      value: value,
+      success: success,
+      fail: res => console.log(res)
+    });
+  },
+
   //开门
   openroom: function (e){
     var athis=this;
     var locktype = e.currentTarget.dataset.locktype;
     var roomcode = e.currentTarget.dataset.roomcode;
     var nethouseid = e.currentTarget.dataset.nethouseid;
+
+    var oauthcode = e.currentTarget.dataset.oauthcode;
+    var lockname = e.currentTarget.dataset.lockname;
+    var lockid = e.currentTarget.dataset.lockid;
+
+    if (lockid == 12) {
+      athis.setData({
+        medalstate: "2",
+        medalmsg: "1",
+        lock_id: lockid
+      })
+      sitong.lockid = lockid;
+      sitong.lockname = lockname;
+      sitong.locktype = locktype;
+      sitong.nethouseid = nethouseid;
+      sitong.oauthcode = oauthcode;
+      return;
+    }
+
     if (locktype=="0000"){
       utils.showLoading("请稍等");
       utils.request("/order/blueLock", {
@@ -252,7 +444,11 @@ Page({
   },
   //关闭弹出框
   closemedal: function () {
+    dev.deviceId && wx.closeBLEConnection({
+      deviceId: dev.deviceId
+    })
     this.setData({
+      enable: true,
       medalstate: "1"
     })
   },
@@ -351,6 +547,10 @@ Page({
    */
   lanyaopen() {
     let that = this;
+    if (this.data.lock_id == 12) {
+      this.openLockSitong();
+      return;
+    }
     that.setData({
       enable: false,
       state: '正在开启蓝牙设备',

@@ -1,11 +1,15 @@
-<view class="myuser">
-  <image class="imagebcg" src='../images/userbcg.jpg'></image>
-  <view class="userbcg">
-    <view class="luser">
-      <open-data type="userAvatarUrl"></open-data>
+<view class="userbcg">
+  <view class='userlt'>
+    <view>
+      <open-data class="luser" type="userAvatarUrl"></open-data>
     </view>
-     <open-data class="ruser" type="userNickName" lang="zh_CN"></open-data>
-     <view class="viewphone">{{user_phone}}</view>
+    <view>
+      <open-data class="ruser" type="userNickName" lang="zh_CN"></open-data>
+      <view>{{user_phone}}</view>
+    </view>
+  </view>
+  <view class='userrt' bindtap='changeuser'>
+    <image src='../images/user_4.png'></image>切换账号
   </view>
 </view>
 <view class="tablist">

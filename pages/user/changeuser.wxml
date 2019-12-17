@@ -1,0 +1,13 @@
+<view class="container phonecon">
+  <view>
+    <input bindinput='userphone' type='number' placeholder='输入手机号' value='{{getwxphone}}'></input>
+  </view>
+  <view class="view1">
+    <input type='text' bindinput='userphonecode' disabled='{{codedisabled}}' placeholder='请输入验证码'></input>
+    <view bindtap='getphonecode' wx:if="{{condeindex==1}}">{{codevalue}}</view>
+    <view wx:if="{{condeindex==2}}" class="disabledbtn">{{codevalue}}</view>
+  </view>
+  <view>
+    <button class="button3" bindtap='getphonemsg' disabled='{{codedisabled}}'>确定</button>
+  </view>
+</view>

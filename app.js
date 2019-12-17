@@ -47,14 +47,10 @@ App({
     skey: "",
     minroute:"",
     showstate:"1",//小程序跳转成功的状态
-    //urls: "http://192.168.1.90:9012",
-    //urls:"http://eidop.com:9002",
-    //urls: "http://192.168.1.66:9002",
-    //urls: "http://192.168.1.58:9002",
-    //urls: "https://m.useid.cn",
-    urls: "https://m.useid.cn:9007",
-    //urls: "http://192.168.1.171:9002",
-    openstate:"1"
+    // urls: "https://m.useid.cn:9007",    // 华为测试
+    // urls: "http://192.168.1.90:9012",   // 内部测试
+    urls: "http://192.168.1.123:9002",  // 本地
+    openstate: "1"
   },
   getLogin: function () {
     var skeys = this;

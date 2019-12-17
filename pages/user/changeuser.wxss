@@ -1,0 +1,5 @@
+.phonecon view{width: 600rpx;margin-bottom: 40rpx}
+.phonecon view input{background-color:#fff;font-size: 30rpx;padding:20rpx 15rpx;border-bottom: 1px solid #dcdcdc}
+.phonecon view.view1{position: relative;z-index: 99}
+.phonecon view.view1 view{position:absolute;top:15rpx;right: 10rpx; width: 150rpx;font-size: 24rpx;background-color: #f5c343;color: #fff;margin:0;z-index: 100;padding: 10rpx 0;border-radius: 30rpx;text-align: center}
+.phonecon view.view1 view.disabledbtn{color: #fff;background-color: #a19c9c;}

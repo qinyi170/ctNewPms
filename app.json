@@ -1,7 +1,7 @@
 {
   "plugins": {
     "myPlugin": {
-      "version": "1.1.4",
+      "version": "1.1.3",
       "provider": "wx3107f0a218053d99"
     }
   },
@@ -13,7 +13,8 @@
     "pages/user/user",
     "pages/user/roomnotice",
     "pages/route/route",
-    "pages/test/test"
+    "pages/test/test",
+    "pages/user/changeuser"
   ],
   "window": {
     "backgroundTextStyle": "light",

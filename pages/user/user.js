@@ -1,15 +1,15 @@
 const app = getApp()
 var utils = require("../../utils/util.js");
 Page({
-  data:{
-    notices:1,
-    noticestype:1
+  data: {
+    notices: 1,
+    noticestype: 1
   },
-  onShow:function(){
+  onShow: function () {
     this.noticeactive();
     this.showPhone();
   },
-  noticeactive:function(){
+  noticeactive: function () {
     var athis = this;
     utils.showLoading("请稍等");
     utils.request("/order/queryOrderMsg", {
@@ -18,17 +18,17 @@ Page({
       console.log(res1)
       wx.hideLoading();
       if (res1.data.result == "0") {
-        if (res1.data.dataObject==0){
+        if (res1.data.dataObject == 0) {
           athis.setData({
             notices: res1.data.dataObject,
             noticestype: 1
           })
-        }else{
+        } else {
           athis.setData({
             notices: res1.data.dataObject,
             noticestype: 2
-          })         
-        } 
+          })
+        }
       } else {
         if (!res1.data.result) {
           utils.alertViewNosucces("提示", "服务未响应，请稍后再试", false);
@@ -61,10 +61,10 @@ Page({
   },
   phonecallevent: function () {
     wx.makePhoneCall({
-      phoneNumber: "4000915055"
+      phoneNumber: "01058815600"
     })
   },
-  getnotice:function(){
+  getnotice: function () {
     wx.navigateTo({
       url: "../user/roomnotice"
     })
@@ -83,5 +83,19 @@ Page({
         console.log("转发失败:" + JSON.stringify(res));
       }
     }
+  },
+  changeuser() {
+    var athis = this;
+    wx.showModal({
+      title: '提示',
+      content: '确定要切换账号吗?',
+      success(res) {
+        if (res.confirm) {
+          wx.navigateTo({
+            url: 'changeuser',
+          })
+        }
+      }
+    })
   }
 })

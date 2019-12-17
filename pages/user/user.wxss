@@ -1,8 +1,14 @@
 .myuser{height: 250rpx;position: relative}
 .imagebcg{width: 750rpx;height: 240rpx;position: absolute;top: 0;z-index: 100}
 .userbcg{width: 640rpx;margin: 0 auto;height: 160rpx;position: relative;z-index: 101;border-radius: 6px;box-shadow:1px 1px 3px #D1CDCD;margin-top: 40rpx;padding-top:40rpx;padding-left: 20rpx;background-color: #fff}
-.luser{float:left;width: 122rpx;height: 122rpx;border-radius: 50%;margin-right: 40rpx;}
-.ruser{font-size: 34rpx;}
+.userbcg{background-color: #f5c343;padding: 20rpx 40rpx;display: flex;justify-content:space-between;align-items:center}
+.userbcg view.userlt>view:first-of-type{float: left;margin-right: 15rpx;}
+.userbcg view.userlt>view:last-of-type{margin-top: 15rpx;}
+.userbcg view.userlt>view:last-of-type view{font-size: 26rpx;color: #fff}
+.luser{display: block; width: 122rpx;height: 122rpx;border-radius: 50%;overflow:hidden;border: 2px solid #fff;}
+.ruser{font-size: 30rpx;color: #fff;}
+.userbcg view.userrt{font-size: 28rpx;color: #fff;padding: 25rpx 0;white-space: nowrap;}
+.userbcg view.userrt image{width: 25rpx;height: 20rpx;margin-right: 10rpx;}
 .tablist{width: 640rpx;margin: 0 auto;}
 .tablist view{font-size: 32rpx;border-top: 1rpx solid #e1e1e1;padding: 40rpx 0}
 .tablist view:first-child{border-top:none}
